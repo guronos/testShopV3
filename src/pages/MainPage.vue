@@ -6,12 +6,13 @@
                     :id="card.id"
                     :title="card.title"
                     :descriptions="card.description"
-                    :image-src="'../../assets/CardDefault.svg'"
+                    :image-src="'../assets/CardDefault.svg'"
             />
         </div>
     </div>
     <div class="btn__wrap">
         <TheButton
+            v-if="loadedCards.length !== getCards.length"
                 class="pointer"
                 :text="'Показать еще'"
                 @click="incrementStep"
@@ -26,9 +27,9 @@ import {useStoreCards} from "@/store/Cards.ts";
 import {storeToRefs} from "pinia";
 
 const store = useStoreCards()
-const {getCards} = storeToRefs(store)
+const { loadedCards, getCards} = storeToRefs(store)
 const {requestCards, incrementStep } = store
-requestCards()
+if (!getCards.value.length) requestCards()
 // storeData.requestCards()
 // const cards = storeData.getCards
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <img class="card__image" :src="getSrcImg(props.imageSrc)">
+        <img class="card__image" :src="getImageSource(props.imageSrc)">
         <div class="card__info">
             <div class="info-top">
                 <div class="card__title">{{props.title}}</div>
@@ -8,7 +8,9 @@
             </div>
             <div class="info_bottom">
                 <div class="card__price">{{props.price}} {{props.currency}}</div>
-                <BasketIcon class="pointer"/>
+                <BasketIcon class="pointer hover"
+                    @click="addBasket(props.id)"
+                />
             </div>
         </div>
     </div>
@@ -16,11 +18,15 @@
 <script setup lang="ts">
 import BasketIcon from "@/assets/BasketIcon.vue";
 import {Card} from './propsInterfaces.ts'
+import {useStoreCards} from "@/store/Cards.ts";
+import {getPathImg} from "@/helpers";
 const props = withDefaults(defineProps<Card>(), {
     imageSrc: '@/assets/CardDefault.png',
     currency: '₽'
 })
-const getSrcImg = (src: string) => new URL(src, import.meta.url).href
+const store = useStoreCards()
+const {addBasket} = store
+const getImageSource = getPathImg
 </script>
 <style scoped>
 .card {

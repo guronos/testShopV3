@@ -1,9 +1,9 @@
 <template>
     <div class="card">
-        <div class="card__remove pointer">
+        <div class="card__remove pointer" @click="removeCardInBasket(props.id)">
             <img src="@/assets/close.svg">
         </div>
-        <img class="card-img" src="@/assets/CardDefault.svg">
+        <img class="card-img" :src="getImageSource(props.imageSrc)">
         <div class="card__info">
             <div class="info-top">
                 <div class="card__title">{{props.title}}</div>
@@ -17,11 +17,16 @@
 </template>
 <script setup lang="ts">
 import {Card} from './propsInterfaces.ts'
+import {getPathImg} from "@/helpers";
+import {useStoreCards} from "@/store/Cards.ts";
 
 const props = withDefaults(defineProps<Card>(), {
     imageSrc: '@/assets/CardDefault.png',
     currency: '₽'
 })
+const getImageSource = getPathImg
+const store = useStoreCards()
+const {removeCardInBasket} = store
 </script>
 <style scoped>
 .card {
@@ -53,5 +58,10 @@ const props = withDefaults(defineProps<Card>(), {
 .info_bottom {
     display: flex;
     justify-content: space-between;
+}
+.card__description {
+  height: 7rem;
+  overflow: auto;
+  margin-bottom: 8px;
 }
 </style>
