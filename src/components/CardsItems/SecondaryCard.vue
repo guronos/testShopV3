@@ -1,9 +1,9 @@
 <template>
     <div class="card">
-        <div class="card__remove pointer" @click="removeCardInBasket(props.id)">
-            <img src="@/assets/close.svg">
+        <div class="card__remove pointer" @click="removeCardInBasket(props.basketId!)">
+            <img src="@/assets/close.svg" alt="example">
         </div>
-        <img class="card-img" :src="getImageSource(props.imageSrc)">
+        <img class="card-img" :src="getImageSource(props.imageSrc)" alt="example">
         <div class="card__info">
             <div class="info-top">
                 <div class="card__title">{{props.title}}</div>
@@ -16,11 +16,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import {Card} from './propsInterfaces.ts'
+import {CardBasket} from './propsInterfaces.ts'
 import {getPathImg} from "@/helpers";
 import {useStoreCards} from "@/store/Cards.ts";
 
-const props = withDefaults(defineProps<Card>(), {
+const props = withDefaults(defineProps<CardBasket>(), {
     imageSrc: '@/assets/CardDefault.png',
     currency: '₽'
 })
@@ -31,12 +31,12 @@ const {removeCardInBasket} = store
 <style scoped>
 .card {
     position: relative;
-    width: 500px;
-    height: 200px;
-    /*border-radius: 10px;*/
     background-color: #FFFFFF;
     box-shadow: 4px 4px 10px 0 #00000033;
     display: flex;
+    max-width: 500px;
+    width: 95%;
+    max-height: 200px;
 }
 .card__remove {
     position: absolute;
@@ -44,12 +44,11 @@ const {removeCardInBasket} = store
     right: 1%;
 }
 .card-img {
-    width: 200px;
+    width: 40%;
     height: 200px;
 }
 .card__info {
     padding: 20px;
-    /*width: 300px;*/
     display: flex;
     flex-direction: column;
     height: 80%;
@@ -60,7 +59,7 @@ const {removeCardInBasket} = store
     justify-content: space-between;
 }
 .card__description {
-  height: 7rem;
+  max-height: 7rem;
   overflow: auto;
   margin-bottom: 8px;
 }

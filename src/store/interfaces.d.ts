@@ -1,4 +1,4 @@
-export interface Card {
+export interface CardResponse {
     id: string;
     title: string;
     price: string;
@@ -7,4 +7,11 @@ export interface Card {
     category: string;
     size: string;
     count?: string | null;
+}
+export interface Card extends CardResponse {
+    inBasket: boolean;
+    handleCount: number;
+}
+export interface CardBasket extends Card {
+    basketId?: string;
 }
