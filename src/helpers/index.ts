@@ -1,1 +1,0 @@
-export const getPathImg = (src: string) => new URL(src, import.meta.url).href

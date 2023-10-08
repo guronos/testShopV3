@@ -8,7 +8,7 @@
                             :id="card.id"
                             :title="card.title"
                             :descriptions="card.description"
-                            :image-src="'../assets/CardDefault.svg'"
+                            :image-src="'/CardDefault.svg'"
                             :handleCount="card.handleCount"
                             :inBasket="card.inBasket"
                     />

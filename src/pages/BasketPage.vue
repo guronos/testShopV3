@@ -13,7 +13,7 @@
                 :basketId="card.basketId"
                 :title="card.title"
                 :descriptions="card.description"
-                :imageSrc="'../assets/CardDefault.svg'"
+                :imageSrc="'/CardDefault.svg'"
             />
           </div>
         </TransitionGroup>

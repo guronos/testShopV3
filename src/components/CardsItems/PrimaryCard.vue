@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <img class="card__image" :src="getImageSource(props.imageSrc)" alt="example">
+        <img class="card__image" :src="props.imageSrc" alt="example">
         <div class="card__info">
             <div class="info-top">
                 <div class="card__title">{{props.title}}</div>
@@ -30,16 +30,14 @@
 import BasketIcon from "@/assets/BasketIcon.vue";
 import {Card} from './propsInterfaces.ts'
 import {useStoreCards} from "@/store/Cards.ts";
-import {getPathImg} from "@/helpers";
 import {computed} from "vue";
 const props = withDefaults(defineProps<Card>(), {
-    imageSrc: '@/assets/CardDefault.png',
+    imageSrc: '/CardDefault.svg',
     currency: '₽',
     inBasket: false
 })
 const store = useStoreCards()
 const {addBasket} = store
-const getImageSource = getPathImg
 const validateCount = computed(() => {
     return props.handleCount && props.handleCount > 0;
 

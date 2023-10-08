@@ -3,7 +3,7 @@
         <div class="card__remove pointer" @click="removeCardInBasket(props.basketId!)">
             <img src="@/assets/close.svg" alt="example">
         </div>
-        <img class="card-img" :src="getImageSource(props.imageSrc)" alt="example">
+        <img class="card-img" :src="props.imageSrc" alt="example">
         <div class="card__info">
             <div class="info-top">
                 <div class="card__title">{{props.title}}</div>
@@ -17,14 +17,12 @@
 </template>
 <script setup lang="ts">
 import {CardBasket} from './propsInterfaces.ts'
-import {getPathImg} from "@/helpers";
 import {useStoreCards} from "@/store/Cards.ts";
 
 const props = withDefaults(defineProps<CardBasket>(), {
-    imageSrc: '@/assets/CardDefault.png',
+    imageSrc: './CardDefault.svg',
     currency: '₽'
 })
-const getImageSource = getPathImg
 const store = useStoreCards()
 const {removeCardInBasket} = store
 </script>
